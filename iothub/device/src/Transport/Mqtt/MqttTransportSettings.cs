@@ -61,7 +61,7 @@ namespace Microsoft.Azure.Devices.Client.Transport.Mqtt
             this.QoSPropertyName = "mqtt-qos";
             this.RetainPropertyName = "mqtt-retain";
             this.WillMessage = null;
-            this.DefaultReceiveTimeout = TimeSpan.FromSeconds(DefaultReceiveTimeoutInSeconds);
+            this.SetDefaultReceiveTimeout(TimeSpan.FromSeconds(DefaultReceiveTimeoutInSeconds));
         }
 
         public bool DeviceReceiveAckCanTimeout { get; set; }
@@ -97,7 +97,17 @@ namespace Microsoft.Azure.Devices.Client.Transport.Mqtt
             return this.transportType;
         }
 
-        public TimeSpan DefaultReceiveTimeout { get; set; }
+        private TimeSpan defaultReceiveTimeout;
+
+        public TimeSpan GetDefaultReceiveTimeout()
+        {
+            return defaultReceiveTimeout;
+        }
+
+        public void SetDefaultReceiveTimeout(TimeSpan value)
+        {
+            defaultReceiveTimeout = value;
+        }
 
         public RemoteCertificateValidationCallback RemoteCertificateValidationCallback { get; set; }
 

@@ -1,25 +1,23 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace Microsoft.Azure.Devices.Client.Test
 {
-    using System;
-    using Microsoft.Azure.Devices.Client.TransientFaultHandling;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using ExponentialBackoff = Microsoft.Azure.Devices.Client.ExponentialBackoff;
-    using NSubstitute;
-
     [TestClass]
     [TestCategory("Unit")]
     public class RetryPolicyTests
     {
         [TestMethod]
-        public void NoRetryPolicy_VerifyBehavior_Success()
+        public void NoRetryPolicy_RecommendsNo()
         {
+            // arrange
             var noRetryPolicy = new NoRetry();
 
-            TimeSpan retryInterval;
-            Assert.IsFalse(noRetryPolicy.ShouldRetry(Arg.Any<int>(), Arg.Any<Exception>(), out retryInterval));
+            // act and assert
+            Assert.IsFalse(noRetryPolicy.ShouldRetry(0, null, out TimeSpan retryInterval));
             Assert.AreEqual(TimeSpan.Zero, retryInterval);
         }
     }

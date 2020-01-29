@@ -19,6 +19,6 @@ namespace Microsoft.Azure.Devices.Client
         /// <summary>
         /// The default receive timeout.
         /// </summary>
-        TimeSpan DefaultReceiveTimeout { get; }
+        TimeSpan GetDefaultReceiveTimeout();
     }
 }

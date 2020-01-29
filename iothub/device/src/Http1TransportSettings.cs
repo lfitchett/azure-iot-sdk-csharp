@@ -26,7 +26,12 @@ namespace Microsoft.Azure.Devices.Client
         }
 
         public X509Certificate2 ClientCertificate { get; set; }
-        public TimeSpan DefaultReceiveTimeout => DefaultOperationTimeout;
+
+        public TimeSpan GetDefaultReceiveTimeout()
+        {
+            return DefaultOperationTimeout;
+        }
+
         public IWebProxy Proxy { get; set; }
     }
 }

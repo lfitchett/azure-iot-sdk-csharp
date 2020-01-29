@@ -17,7 +17,7 @@ namespace Microsoft.Azure.Devices.Client
             {
                 try
                 {
-                    var key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\SQMClient");
+                    RegistryKey key = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\SQMClient");
                     if (key != null)
                     {
                         return key.GetValue("MachineId") as string;
@@ -26,7 +26,10 @@ namespace Microsoft.Azure.Devices.Client
                 catch (Exception ex)
                 {
                     Debug.Assert(false, ex.Message);
-                    if (Logging.IsEnabled) Logging.Error(null, ex, nameof(TelemetryMethods));
+                    if (Logging.IsEnabled)
+                    {
+                        Logging.Error(null, ex, nameof(TelemetryMethods));
+                    }
                 }
             }
 
